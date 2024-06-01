@@ -1,0 +1,2016 @@
+/*
+ * Login: xposte00
+ *
+ * Doplnte sve reseni.
+ *
+ * Nezapomente pridat strucne hromadne komentare pro pravidla jednotlivych sekci
+ * a pro netrivialni useky kodu.
+ *
+ * Snazte se dodat aspon castecne reseni, i snaha se hodnoti.
+ */
+
+/* Textile */
+@font-face {
+    font-family: 'Textile';
+    src: url('../fonts/textile.ttf') format('truetype');
+}
+
+/* Base styles for whole body */
+body {
+    font-family: 'Spectral', serif;
+    color: #333333; 
+    font-size: 16px; 
+    margin: 0;
+    padding: 0;
+    background-image: url('../img/bg/bg-body.svg'); 
+    background-repeat: repeat;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column;
+    min-width: 768px;
+}
+
+main {
+    width: 100%;
+}
+
+/* Base styles for all h2 span */
+.heading h2 {
+    font-family: 'Calistoga';
+    color: green; 
+    margin: 0;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.heading span {
+    font-family: Textile;
+    font-size: 23px;
+}
+
+/* Styles for header */
+#header {
+    width: 100%;
+    background-color: white;
+}
+
+/* Header title styles */
+#header-title, h2 {
+    font-family: 'Calistoga';
+    font-size: 24px; 
+    letter-spacing: 0.2rem; 
+}
+
+/* General header styling, employing a flex layout for vertical alignment and spacing */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start; 
+    width: 100%;
+    height: auto;
+    margin-bottom: -40px;
+    padding: 0;
+}
+
+/* Specific styles for the #header-title, including a fixed background for a parallax effect and full viewport height */
+#header-title {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--strong-white);
+    background-image: url('../img/bg/bg-header.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Parallax Scrolling */
+    height: 100vh;
+}
+
+/* Dynamic font sizing for responsive design and stylized text appearance within the header */
+#header-title span {
+    display: block; 
+    text-align: center; 
+    color: #fff; 
+    font-weight: bold;
+    text-shadow: 0 0 10px green, 0 0 20px green;
+    margin-top: -250px;
+    font-size: 10vw; 
+}
+
+/* Individual styling for each line in the header to create a hierarchical and visually appealing title */
+#header-title span:nth-child(1) { /* Largest, primary title */
+    font-size: 16vh; 
+    text-transform: uppercase;
+    font-family: 'Calistoga', sans-serif;
+}
+
+#header-title span:nth-child(2) { /* Secondary title with custom flags as decorations */
+    font-size: 9vh; 
+    margin-top: -1.5vw;
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    font-family: 'Calistoga', sans-serif;
+}
+
+#header-title span:nth-child(3) { /* Subsequent lines for additional information or emphasis */
+    font-size: 3vh; 
+    margin-top: -0.5vw;
+    text-transform: uppercase;
+    font-family: 'Calistoga', sans-serif;
+}
+
+#header-title span:nth-child(4) { 
+    font-size: 4vh; 
+    margin-top: 1vw;
+    font-family: 'Textile', sans-serif;
+}
+
+/* Flags as decorative elements on the second line of the header */
+#header-title span:nth-child(2)::before,
+#header-title span:nth-child(2)::after {
+    content: ''; 
+    position: absolute; 
+    top: calc(50% + 2vh);  
+    width: 12vh;
+    height: 16vh;
+    background: url('../img/custom/flag.svg') no-repeat center / contain; 
+    transform: translateY(-50%); 
+}
+
+#header-title span:nth-child(2)::before {
+    left: -12vh; 
+}
+
+#header-title span:nth-child(2)::after {
+    right: -12vh; 
+    
+    transform: translateY(-50%) scaleX(-1); /* Mirrored flag */
+}
+
+
+/* Decorative element at the bottom of the header, likely to blend or transition into the main content */
+#header-title::after {
+    content: '';
+    position: absolute; 
+    bottom: -150px; 
+    left: 0;
+    width: 100%; 
+    height: 40vh; 
+    background-image: url('../img/custom/beers.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1; 
+}
+
+/* Quote styling for the last child in the header title, adding visual flair */
+#header-title span:last-child::before {
+    content: open-quote;
+}
+
+#header-title span:last-child::after {
+    content: close-quote;
+}
+
+
+/* Animation for header title*/
+html:not(.scrolled) #header-title span {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+
+html.scrolled #header-title span {
+    opacity: 0;
+    transform: translateY(200px);
+}
+
+
+html:not(.scrolled) #header-title span:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+html:not(.scrolled) #header-title span:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+html:not(.scrolled) #header-title span:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+html:not(.scrolled) #header-title span:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+
+
+/* General styling for the header menu container */
+#header-menu {
+    order: 2; /* Positioning in a flex container */
+    width: 100%;
+    max-width: 1000px;
+    min-width: 768px;
+    bottom: -170px;
+    background: white;
+    border-top: 2px dashed green;
+    border-bottom: 2px dashed green;
+    position: relative;
+    margin: 0 auto;
+    z-index: 5;
+}
+
+/* Styles for the navigation list using grid layout for alignment */
+#header-menu nav ul {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Seven equal columns 6 for menu buttons and 1 for img */
+    justify-items: center; 
+    list-style: none;
+    width: 100%; 
+    margin: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-inline-start: 0px;
+}
+
+#header-menu nav {
+    left: 50px;
+}
+
+/* Additional styling for navigation links */
+#header-menu nav ul li a {
+    font-family: 'Calistoga', cursive;
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+
+/* Position of header menu elements */
+#header-menu nav ul li:nth-child(1) { grid-column: 1; }
+#header-menu nav ul li:nth-child(2) { grid-column: 2; }
+#header-menu nav ul li:nth-child(3) { grid-column: 3; }
+
+/* Special after-element for adding a decorative image to the menu */
+#header-menu nav ul::after {
+    content: '';
+    position: absolute;
+    grid-column: 4; 
+    width: 40px; 
+    height: 60px;
+    top: -3px;
+    background-image: url('../img/custom/leaf.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: rotate(90deg) scaleX(-1);
+}
+
+#header-menu nav ul li:nth-child(4) {
+     grid-column: 5; 
+     margin-right: 10px;
+     margin-left: -10px;
+    }
+#header-menu nav ul li:nth-child(5) { 
+    grid-column: 6; 
+    margin-right: 10px;
+}
+#header-menu nav ul li:nth-child(6) {
+     grid-column: 7; 
+     margin-right: 20px;
+     margin-left: 10px;
+}
+
+/* Hover effect for links */
+#header-menu nav ul li a:hover {
+    color: green;
+}
+
+/* Styling for the About section container */
+#about {
+    display: flex; /* Use flexbox for layout */
+    position: relative;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 1199px;
+    min-width: 768px;
+    margin: auto; 
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    border-right: 1px dashed green; 
+    border-left: 1px dashed green;
+    padding-top: 280px;
+    padding-bottom: 160px;
+}
+
+/* Styling for elements with the 'name' class */
+.name {
+    font-style: italic;
+    font-size: 20px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Adjusts positioning and alignment for 'name' and 'references' within the About section */
+#about .name, #about .references {
+    width: 60%;
+    display: flex;
+    justify-content: flex-end; 
+    text-align: right; 
+    z-index: 5;
+}
+
+/* Styles for reference list */
+.references ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    height: 25px;
+    margin: 0;
+}
+
+/* Styles for reference list items */
+.references li {
+    position: relative; 
+    display: inline-flex;
+}
+
+/* Styles for links within reference list items */
+.references li a {
+    display: inline-block;
+    text-decoration: none; 
+    color: black; 
+    font-size: 0; 
+}
+
+/* Styles for stars using FontAwesome */
+.references li a::before {
+    font-family: 'Font Awesome 5 Free'; 
+    content: '\f005'; 
+    font-weight: 900; 
+    font-size: 20px; 
+    color: green; 
+    display: inline-block;
+    transition: filter 0.3s; 
+    filter: none; 
+} 
+
+/* Hover effect for reference links */
+.references li a:hover::before {
+    filter: drop-shadow(0 0 5px green); 
+}
+
+/* Pseudo-element for decorative sprites on the right of the About section */
+#about::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 150px; 
+    height: 300px; 
+    background: url('../img/custom/sprites.svg') -1125px 300px;
+    background-size: cover;
+    transform: rotate(-45deg) scale(1.1);
+    right: 100px;
+    top: 140px;
+    z-index: 1;
+}
+
+#about .heading {
+    z-index: 5;
+}
+
+/* Pseudo-element for additional decorative sprites on the left of the About section */
+#about::after {
+    content: '';
+    position: absolute;
+    width: 166px; 
+    height: 300px; 
+    background: url('../img/custom/sprites.svg') -970px 300px;
+    background-size: cover;
+    transform: rotate(-45deg) scale(1.1);
+    bottom: 50px;
+    left: 100px;
+    z-index: 1;
+}
+
+/* Main container for the video player, including alignment and size settings */
+.video-player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    width: 60%;
+    max-width: 768px; 
+    
+    max-height: 432px; 
+    margin-top: 10px;
+    margin-bottom: 5px;
+    z-index: 2;
+}
+
+/* Container for the video content with a 16:9 aspect ratio */
+.video-content {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 56.25%; 
+}
+
+/* Styling for the video element */
+.video-content video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+/* Base styles for video control buttons */
+.playpause, .mute, .time, .fullscreen {
+    position: absolute;
+    bottom: 15px;
+    grid-column: auto; 
+}
+
+.playpause {
+    grid-column: 1 / span 1; 
+}
+
+.mute {
+    grid-column: 2 / span 1; 
+    left: -20px;
+}
+
+.time {
+    grid-column: 3 / span 1; 
+    color: green;
+    bottom: 20px;
+    left: -30px;
+    font-size: 20px;
+    text-shadow: 0px 0px 4px #FFFFFF;
+    position: absolute;
+    cursor: pointer;
+}
+
+.fullscreen {
+    grid-column: 12 / span 1; 
+}
+
+.playpause, .mute, .fullscreen {
+    font-size: 0; 
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    position: relative; 
+    cursor: pointer;
+}
+
+
+button::before {
+    font-size: 16px; 
+    color: green; 
+}
+
+/* Progress bar styling */
+.progress {
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 15px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.video-player.fullscreen .progress {
+    margin-bottom: 10px;
+}
+
+/* Progress bar fill styling */
+.progress-bar {
+    position: absolute;
+    display: block;
+    height: 100%;
+    background-color: green;
+    width: 100%;
+}
+
+/* FontAwesome icons styling for play, pause, ended states, and mute/unmute */
+.video-player[data-state="paused"] .playpause::before {
+    content: "\f04b"; 
+    font-family: 'Font Awesome 6 Free'; 
+    font-weight: 900; 
+    font-size: 20px;
+    text-shadow: 0px 0px 4px #FFFFFF;
+}
+
+.video-player[data-state="ended"] .playpause::before {
+    content: "\f0e2"; 
+    font-family: 'Font Awesome 6 Free'; 
+    font-weight: 900; 
+    font-size: 20px;
+    text-shadow: 0px 0px 4px #FFFFFF;
+}
+
+.video-player[data-state="played"] .playpause::before {
+    content: "\f04c"; 
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 20px;
+    text-shadow: 0px 0px 4px #FFFFFF;
+}
+
+.video-player[data-mute="unmuted"] .mute::before {
+    content: "\f028"; 
+    font-family: 'Font Awesome 6 Free'; 
+    font-weight: 900; 
+    font-size: 20px;
+    text-shadow: 0px 0px 4px #FFFFFF;
+}
+
+
+.video-player[data-mute="muted"] .mute::before {
+    content: "\f6a9"; 
+    font-family: 'Font Awesome 6 Free'; 
+    color: rgb(105, 103, 103);
+    font-weight: 900;
+    font-size: 20px;
+    text-shadow: 0px 0px 4px #FFFFFF;
+}
+
+.video-player .fullscreen::before {
+    content: "\f065"; 
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 20px;
+    width: 60px;
+    height: 60px;
+    text-shadow: 0px 0px 4px #FFFFFF;
+}
+
+.video-player .video-controls {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+
+/* Controls visibility toggling */
+.video-player:hover .video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); 
+    align-items: center;
+    background: transparent;
+    opacity: 0.7;
+}
+
+.video-player[data-state="paused"]::before {
+    content: "\f04b"; 
+    font-family: "Font Awesome 6 Free"; 
+    font-weight: 900; 
+    opacity: 0.6;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 70px; 
+    color: green; 
+    pointer-events: none; 
+    z-index: 10; 
+    text-shadow: 0px 0px 10px #FFFFFF;
+}
+
+.video-player[data-state="ended"]::before {
+    content: "\f0e2"; 
+    font-family: "Font Awesome 6 Free"; 
+    font-weight: 900; 
+    opacity: 0.6;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 70px; 
+    color: green; 
+    pointer-events: none; 
+    z-index: 10; 
+    text-shadow: 0px 0px 10px #FFFFFF;
+}
+
+
+.video-player.paused .play-button {
+    display: block; 
+}
+
+.video-popup {
+    background-color: white; 
+    color: black; 
+    border: 2px solid green; 
+    padding: 5px 10px; 
+    border-radius: 5px; 
+    font-size: 14px; 
+    position: fixed; 
+    display: none; 
+    z-index: 20; 
+    pointer-events: none; 
+    opacity: 0.8;
+    box-shadow: 0 0 15px 5px white;
+}
+
+.video-player .time[data-type="remained"]::before {
+    content: "-";
+    position: relative;
+    left: 0;
+    top: 0;
+    color: inherit; 
+}
+
+/* Fullscreen adjustments for the video player */
+.video-player.fullscreen {
+    width: 100%; 
+    height: 100vh; 
+    max-width: none; 
+    max-height: none; 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 9999; 
+    background-color: black;
+    margin-bottom: 20px;
+    cursor: auto;
+}
+
+.video-player.fullscreen .video-content video {
+    object-fit: contain; 
+}
+
+.video-player.fullscreen .mute {
+    left: -5vw;
+    top: -20px;
+}
+
+.video-player.fullscreen .time {
+    left: -8vw;
+    top: -14px;
+}
+
+.video-player.fullscreen .fullscreen {
+    right: -3vw;
+    top: -20px;
+}
+
+.video-player.fullscreen .playpause {
+    top: -20px;
+}
+
+
+
+
+
+
+/* Decorative image for the #team section */
+#team::before {
+    content: '';
+    position: absolute; 
+    top: -55px;
+    left: 0;
+    width: 100%; 
+    height: 15vh; 
+    background-image: url('../img/custom/hr.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1; 
+}
+
+/* Base styling for the #team section */
+#team {
+    position: relative;
+    background: url('../img/bg/bg-team.jpg') no-repeat center center; /* Background image with cover effect */
+    background-size: cover;
+    padding-top: 100px;
+    padding-bottom: 160px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styling for headings within the #team section */
+#team .heading {
+    text-align: center; 
+}
+
+#team .heading h2{
+    margin-bottom: 5px; 
+    color: lightgreen;
+    text-transform: uppercase;
+}
+
+#team .heading span{
+    color: white;
+    margin-bottom: 30px;
+}
+
+/* Grid layout for team members' sections */
+#team .section-content {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr) minmax(250px, 1fr));
+    margin-top: 10px;
+}
+
+/* Individual team member item styling */
+#team .section-item {
+    flex: 1 1 250px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Background hover effect for team member items */
+#team .section-item::before, #team .section-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: background-color 0.3s ease; 
+}
+
+#team .section-item::after {
+    background-color: gray; 
+    opacity: 0.25;
+    z-index: 5;
+}
+
+#team .section-item:hover::after {
+    opacity: 0; 
+    z-index: -1;
+}
+
+#team .section-item:hover::before {
+    background-color: rgba(253, 148, 164, 0.5); 
+    z-index: 2;
+}
+
+/* Alternate hover background color for odd items */
+#team .section-item:nth-child(odd):hover::before {
+    background-color: rgba(144, 238, 144, 0.5); 
+    z-index: 2;
+}
+
+/* Styling for team member images */
+#team .section-item img {
+    width: 100%; 
+    height: 300px; 
+    object-fit: cover; 
+    object-position: center;
+    margin-bottom: 20px; 
+    transition: transform 0.3s ease; 
+    z-index: 4; 
+    position: relative;
+}
+
+#team .section-item:hover img {
+    transform: scale(1.072); 
+}
+
+#team .section-item h3, #team .section-item p, #team .section-item .references {
+    z-index: 4; 
+    position: relative; 
+}
+
+#team .section-item h3 {
+    font-family: 'Calistoga';
+    font-weight: 900;
+    order: 2;
+    font-size: 20px;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+/* References list styling for team */ 
+#team .section-item .references ul {
+    display: flex;
+    justify-content: center; 
+    gap: clamp(0px, 0.5vw, 30px);
+    padding: 0;
+    list-style-type: none; 
+    width: 100%; 
+}
+
+#team .section-item h3 {
+    order: 2;
+}
+
+#team .section-item .references {
+    order: 3;
+    width: auto; 
+    justify-content: center; 
+}
+
+#team .section-item p {
+    order: 4;
+    font-size: 15px;
+    margin: 0;
+}
+
+/* Decorative footer image for the #team section */
+#team .section-content::after {
+    content: '';
+    position: absolute; 
+    bottom: -50px; 
+    left: 0;
+    width: 100%; 
+    height: 15vh; 
+    background-image: url('../img/custom/hr.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1; 
+}
+
+
+
+/* Decorative elements sprites positioned above and below of the events section */
+#events .heading::before {
+    content: '';
+    position: absolute;
+    right: 110px;
+    top: -70px;
+    width: 150px;
+    height: 300px;
+    background: url('../img/custom/sprites.svg') 850px 300px;
+    background-size: cover;
+    transform: rotate(-45deg) scale(1.1);
+    z-index: 1; 
+}
+
+#events .section-item h3 {
+    font-family: Calistoga;
+    font-weight: 900;
+    margin-bottom: 3px;
+    margin-top: 0;
+}
+
+#events .heading h2, 
+#events p {
+    position: relative;
+    z-index: 2; 
+}
+
+#events .heading::before, 
+#events .heading::after {
+    content: '';
+    position: absolute;
+    z-index: 1; 
+    
+}
+
+
+
+
+#events .heading::after{
+    content: '';
+    position: absolute;
+    width: 166px; 
+    height: 300px; 
+    background: url('../img/custom/sprites.svg') 430px 300px;
+    background-size: cover;
+    transform: rotate(45deg) scale(1.1);
+    top: 900px;
+    right: 105px;
+    z-index: 1;
+}
+
+/* Base styling for the #events section */
+#events {
+    position: relative;
+    width: 100%;
+    max-width: 1199px;
+    margin: 0 auto;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-right: 2px dashed green;
+    border-left: 2px dashed green;
+    padding-bottom: 160px;
+    padding-top: 100px;
+}
+
+#events .heading {
+    position: relative;
+    text-align: center;
+    margin-bottom: 30px;
+    z-index: 5;
+}
+
+#events .heading h2 {
+    z-index: 5;
+}
+
+/* Styling for individual event items */
+#events .section-item {
+    display: block; 
+    border-bottom: 2px dotted black;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    margin: 20px;
+    overflow: hidden; 
+    z-index: 10;
+    position: relative;
+}
+
+#events .section-item:last-child {
+    border: none;
+    z-index: 5;
+}
+
+/* Enhances images within each event item */
+#events .section-item img {
+    transition: opacity 0.3s ease-in-out; 
+    width: 40%; 
+    height: auto;
+    display: block;
+    z-index: 5;
+    position: relative;
+    opacity: 0.8;
+}
+
+#events .section-item:hover img {
+    opacity: 1;
+}
+
+/* Adjusts the placement and style of images based on their sequence */
+#events .section-item:nth-child(1) img, 
+#events .section-item:nth-child(3) img {
+    float: left;
+    margin-right: 20px;
+    z-index: 5;
+    position: relative;
+}
+
+
+#events .section-item:nth-child(2) img {
+    float: right;
+    margin-left: 20px;
+    z-index: 5;
+}
+
+/* Styling for text and properties within each event item */
+#events .section-item h3,
+#events .section-item .events-props,
+#events .section-item p {
+    box-sizing: border-box;
+    z-index: 5;
+}
+
+#events .section-content {
+    position: relative;
+    z-index: 5;
+}
+
+#events p {
+    font-size: 15px;
+    text-align: justify;
+    white-space: pre-wrap;
+    margin: 0 0 10px;
+    z-index: 5;
+}
+
+/* Flexbox layout for event properties for alignment and spacing */
+.events-props {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+    z-index: 5;
+}
+
+#events .references ul {
+    display: flex; 
+    padding: 0;
+    margin: 0; 
+    list-style-type: none; 
+    gap: 5px; 
+    z-index: 5;
+}
+
+#events .references ul li {
+    margin: 0; 
+    z-index: 5;
+}
+
+#events .section-item:nth-child(2) .events-props,
+#events .section-item:nth-child(2) h3 {
+    text-align: right;
+    justify-content: end;
+    z-index: 5;
+}
+
+#events .section-item img,
+#events .section-item h3 {
+    transition: all 0.5s;
+}
+
+#events .section-item:hover img {
+    width: calc(40% + 10px);
+    transition: width 0.3s ease-in-out; 
+}
+
+
+#events .section-item:hover h3 {
+    color: green; 
+    transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out; 
+}
+
+
+
+/* Sets up the overall background and spacing for the #menu section */
+#menu {
+    position: relative;
+    background: url('../img/bg/bg-menu.jpg');
+    background-repeat: repeat-y; 
+    background-size: 100% auto; 
+    background-position: center 50%; 
+    padding-top: 100px;
+    padding-bottom: 160px;
+}
+
+/* Centers the heading text and sets the margin */
+#menu .heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Styles for the span within the heading, adjusting the text color */
+#menu .heading span {
+    color: white;
+}
+
+/* Establishes a grid layout for the section content, with a white border */
+#menu .section-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    border: white 20px solid; 
+    align-items: center;
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Initial setup for each menu item, making use of grid layout */
+#menu .section-item {
+    display: grid;
+    grid-column: 2; 
+    grid-template-columns: repeat(2, 1fr); 
+    align-items: center; 
+    overflow: hidden;
+    position: relative;
+    z-index: 5;
+}
+
+/* Individual positioning and layout adjustments for different items */
+#menu .section-item:nth-child(1) {
+    grid-column: 1 / span 2; 
+    grid-row: 1; 
+}
+
+#menu .section-item:nth-child(2) {
+    grid-column: 1; 
+    grid-row: 2 / span 2; 
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#menu .section-item:nth-child(3) {
+    grid-column: 3 / span 2; 
+    grid-row: 3 / span 2; 
+}
+
+#menu .section-item:nth-child(4) {
+    grid-column: 2; 
+    grid-row: 2 / span 2; 
+    display: flex;
+    flex-direction: column;
+}
+
+#menu .section-item:nth-child(5) {
+    grid-column: 3; 
+    grid-row: 1 / span 2; 
+    display: flex;
+    flex-direction: column;
+}
+
+#menu .section-item:nth-child(6) {
+    grid-column: 1 / span 2; 
+    grid-row: 4; 
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#menu .section-item:nth-child(7) {
+    grid-column: 4; 
+    grid-row: 1 / span 2;
+    display: flex;
+    flex-direction: column-reverse; 
+}
+
+#menu .section-item:nth-child(3) .figures {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr); 
+}
+
+#menu .section-item:nth-child(3) .figures img:nth-child(1) {
+    grid-row: 1 / 2; 
+}
+
+#menu .section-item:nth-child(3) .figures img:nth-child(2) {
+    grid-row: 2 / 3; 
+}
+
+
+#menu .section-item:nth-child(3) .description{
+    aspect-ratio: 1 / 2; /* Sets the width to height aspect ratio to 1:2 */
+}
+
+/* Adjustment for description elements, including decorative arrows */
+#menu .section-item:nth-child(1) .description::before {
+    content: "";
+    position: absolute;
+    top: 50%; 
+    left: 0; 
+    transition: 0.5s;
+    transform: translateY(-50%) translateX(-100%); 
+    border-top: 20px solid transparent; 
+    border-bottom: 20px solid transparent; 
+    border-right: 20px solid rgba(144, 238, 144, 0.8); 
+}
+
+#menu .section-item:nth-child(1):hover .description::before {
+    border-right: 20px solid rgba(144, 238, 144, 1); 
+    left: -4px
+}
+
+#menu .section-item:nth-child(2) .description::after {
+    content: "";
+    position: absolute;
+    left: 50%; 
+    bottom: -20px; 
+    transition: 0.5s;
+    transform: translateX(-50%); 
+    border-left: 20px solid transparent; 
+    border-right: 20px solid transparent; 
+    border-top: 20px solid rgba(255, 255, 255, 0.8); 
+}
+
+#menu .section-item:nth-child(2):hover .description::after {
+    border-top: 20px solid rgba(255, 255, 255, 1); 
+    bottom: -24px;
+}
+
+#menu .section-item:nth-child(3) .description::before {
+    content: "";
+    position: absolute;
+    top: 50%; 
+    left: 0; 
+    transition: 0.5s;
+    transform: translateY(-50%) translateX(-100%); 
+    border-top: 20px solid transparent; 
+    border-bottom: 20px solid transparent; 
+    border-right: 20px solid rgba(144, 238, 144, 0.8); 
+}
+
+#menu .section-item:nth-child(3):hover .description::before {
+    border-right: 20px solid rgba(144, 238, 144, 1); 
+    left: -4px;
+}
+
+#menu .section-item:nth-child(4) .description::after {
+    content: "";
+    position: absolute;
+    left: 50%; 
+    top: -20px; 
+    transition: 0.5s;
+    transform: translateX(-50%);
+    border-left: 20px solid transparent; 
+    border-right: 20px solid transparent; 
+    border-bottom: 20px solid rgba(255, 182, 193, 0.8); 
+}
+
+#menu .section-item:nth-child(4):hover .description::after {
+    border-bottom: 20px solid rgba(255, 182, 193, 1); 
+    top: -24px;
+}
+
+#menu .section-item:nth-child(5) .description::after {
+    content: "";
+    position: absolute;
+    left: 50%; 
+    top: -20px; 
+    transition: 0.5s;
+    transform: translateX(-50%);
+    border-left: 20px solid transparent; 
+    border-right: 20px solid transparent; 
+    border-bottom: 20px solid rgba(255, 255, 255, 0.8); 
+}
+
+#menu .section-item:nth-child(5):hover .description::after {
+    border-bottom: 20px solid rgba(255, 255, 255, 1); 
+    top: -24px;
+}
+
+
+#menu .section-item:nth-child(6) .description::after {
+    content: "";
+    position: absolute;
+    right: -20px; 
+    top: 50%; 
+    transition: 0.5s;
+    transform: translateY(-50%);
+    border-top: 20px solid transparent; 
+    border-bottom: 20px solid transparent; 
+    border-left: 20px solid rgba(144, 238, 144, 0.8); 
+}
+
+#menu .section-item:nth-child(6):hover .description::after {
+    border-left: 20px solid rgba(144, 238, 144, 1); 
+    right: -24px;
+}
+
+
+#menu .section-item:nth-child(7) .description::after {
+    content: "";
+    position: absolute;
+    left: 50%; 
+    bottom: -20px; 
+    transition: 0.5s;
+    transform: translateX(-50%); 
+    border-left: 20px solid transparent; 
+    border-right: 20px solid transparent; 
+    border-top: 20px solid rgba(255, 182, 193, 0.8); 
+}
+
+/* Background color styling for specific items, creating a unified color theme with variations */
+#menu .section-item:nth-child(7):hover .description::after {
+    border-top: 20px solid rgba(255, 182, 193, 1); 
+    bottom: -24px;
+}
+
+#menu .section-item:nth-child(1), 
+#menu .section-item:nth-child(6), 
+#menu .section-item:nth-child(3) {
+    background-color: rgba(144, 238, 144, 0.8);
+}
+
+#menu .section-item:nth-child(4), 
+#menu .section-item:nth-child(7) {
+    background-color: rgba(255, 182, 193, 0.8);
+}
+
+#menu .section-item:nth-child(2), 
+#menu .section-item:nth-child(5) {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#menu .section-item:nth-child(1):hover, 
+#menu .section-item:nth-child(6):hover, 
+#menu .section-item:nth-child(3):hover {
+    background-color: rgba(144, 238, 144, 1);
+}
+
+#menu .section-item:nth-child(4):hover, 
+#menu .section-item:nth-child(7):hover {
+    background-color: rgba(255, 182, 193, 1);
+}
+
+#menu .section-item:nth-child(2):hover, 
+#menu .section-item:nth-child(5):hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+#menu .section-item:hover .figures img {
+    transform: scale(0.95);
+}
+
+#menu .section-item:nth-child(3):hover .figures img:nth-child(1) {
+    transform-origin: center bottom;
+}
+
+#menu .section-item:nth-child(3):hover .figures img:nth-child(2) {
+    transform-origin: center top;
+}
+
+#menu .section-item:nth-child(3) .figures img:nth-child(1) {
+    transform-origin: center bottom; 
+}
+
+#menu .section-item:nth-child(3) .figures img:nth-child(2) {
+    transform-origin: center top; 
+}
+
+#menu .section-item .figures img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    transition: transform 0.5s ease; 
+}
+
+#menu .section-item .figures {
+    position: relative;
+    width: 100%; 
+}
+
+#menu .section-item .figures::before {
+    content: '';
+    display: block;
+    padding-top: 100%; 
+}
+
+#menu .section-item .description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    width: 100%; 
+    height: 100%; 
+    aspect-ratio: 1 / 1;
+}
+
+#menu .section-item .description span {
+    font-size: 35px;
+}
+
+#menu .section-item .description span::before {
+    content: "$"; 
+}
+
+#menu .section-item .description h3:hover a {
+    color: green;
+}
+
+#menu .section-item .description h3 a {
+    font-family: Calistoga;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 5;
+}
+
+#menu .section-item .description h3 {
+    z-index: 5;
+}
+
+#menu .section-item::after {
+    content: "";
+    position: absolute;
+    background-color: lightgrey;
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+}
+
+#menu .section-item:hover::after {
+    opacity: 0;
+    z-index: 0;
+}
+
+/* Decorative elements at the top and bottom of the section using pseudo-elements */
+#menu::after {
+    content: '';
+    position: absolute;  
+    left: 0;
+    bottom: -50px;
+    width: 100%; 
+    height: 15vh; 
+    background-image: url('../img/custom/hr.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1; 
+}
+
+#menu::before {
+    content: '';
+    position: absolute; 
+    left: 0;
+    top: -55px;
+    width: 100%; 
+    height: 15vh; 
+    background-image: url('../img/custom/hr.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1; 
+}
+
+
+
+
+
+/* Main container for the services section */
+#services {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 100px;
+    padding-bottom: 160px;
+    width: 100%; 
+    max-width: 1199px; 
+    margin: 0 auto; 
+    background-color: white; 
+    border-right: 2px dashed green; 
+    border-left: 2px dashed green; 
+}
+
+/* Styling for the heading within the services section */
+#services .heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Styles for the section content */
+#services .section-content {
+    display: flex;
+    width: 87%;
+    height: auto;
+    border-radius: 5px; ;
+    position: relative;
+    box-shadow: 0px 0px 12px 14px rgba(0,0,0,1);
+    z-index: 2;
+    margin-top: 25px;
+    margin-bottom: 50px;
+    background-color: black;
+    padding: 60px 30px;
+}
+
+/* Overlay effect before hovering */
+#services .section-content::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.3); 
+    opacity: 1; 
+    z-index: 3;
+    width: 105%;
+    height: 110%;
+    transition: opacity 0.5s ease, z-index 0.2s;
+}
+
+/* Hover effect for the overlay, making it disappear */
+#services .section-content:hover::before {
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.5s ease, z-index 0.8s;
+}    
+
+/* Styling for the table within the services section */
+#services table {
+    width: 45%; 
+    margin-right: 20px; 
+    text-align: start; 
+    margin-right: 10px;
+}
+
+/* Hides the table header */
+#services table th {
+    display: none;
+}
+
+/* Styling for links and text within table cells */
+#services table td a, #services table td {
+    color: white; 
+    transition: color 0.5s; 
+}
+
+#services table td:first-child a {
+    font-family: Calistoga;
+}
+
+#services table tr td a:hover {
+    cursor: pointer; 
+}
+
+#services a {
+    color: white; 
+    text-decoration: none; 
+    transition: color 0.5s; 
+}
+
+#services table tr:hover a {
+    color: lightgreen; 
+    font-size: 17px;
+
+}
+
+#services table tr:hover td {
+    color: lightgreen; 
+}
+
+#services table tr:hover td:last-child {
+    font-size: 21px;
+}
+
+#services table tr:last-child:hover td:last-child a {
+    font-size: 19px;
+}
+
+#services table td {
+    transition: color 0.5s; 
+    position: relative; 
+    overflow: hidden; 
+}
+
+#services table tr:not(:last-child) td:nth-child(2)::before {
+    content: "$"; 
+    margin-left: 5px;
+}
+
+#services table tr:last-child td:last-child a {
+    font-size: 18px;
+}
+
+#services table tr:last-child td:last-child a:first-child {
+    margin-left: 5px;
+}
+
+#services table tr td:nth-child(2) {
+    text-align: right;
+    font-size: 20px;
+}
+
+/* Image styles of section content */
+#services .section-content::after {
+    content: "";
+    position: absolute;
+    right: 0; 
+    top: 0;
+    bottom: 0;
+    width: 54%;
+    background-image: url('../img/gang/heisenberg.jpg');
+    background-size: cover;
+    background-position: left center;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+#services table td{
+    padding-bottom: 20px; 
+}
+
+#services table tr:nth-child(8) td:last-child {
+    bottom: 2px;
+}
+
+#services table td:first-child a {
+    margin-right: 5px;
+}
+
+/* Points between first td and second td */
+#services table td:first-child::after {
+    content: "................................................................................................................... ";
+    color: white;
+    position: absolute;
+}
+
+#services table tr:last-child td:last-child {
+    position: absolute;
+    right: 0px;
+    background-color: black;
+}
+
+#services table tr {
+    position: relative;
+}
+
+#services .section-content table tbody tr:not(:last-child) td:nth-child(2) {
+    width: 15px; 
+}
+
+
+
+
+#contact::before {
+    content: '';
+    position: absolute; 
+    width: 100%; 
+    height: 15vh; 
+    top: -55px;
+    left: 0px;
+    background-image: url('../img/custom/hr.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1; 
+}
+
+/* Main container for the contact section, setting the background and layout */
+#contact {
+    background: url('../img/bg/bg-contact.jpg');
+    background-repeat: repeat; 
+    background-size: cover;
+    position: relative;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    width: 100%;
+}
+
+/* Styling for the heading within the contact section */
+#contact .heading {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#contact .heading span {
+    color: white;
+}
+
+/* Flexbox layout for blockquotes */
+#contact blockquote {
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start; 
+}
+
+#contact blockquote p {
+    font-size: 20px;
+    font-style: italic;
+}
+
+/* Adjusts alignment for references or citation lists */
+#contact blockquote .references {
+    align-items: flex-start; 
+}
+
+#contact blockquote .references ul {
+    padding: 0;
+    gap: 10px;
+}
+
+/* Grid layout for the section's content */
+#contact .section-content {
+    display: grid;
+    grid-template-columns: 300px 1fr; 
+    grid-template-rows: auto auto; 
+    grid-row-gap: 40px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+#contact .section-content img {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3; 
+    align-self: start; 
+    height: 400px; 
+    width: 99%;
+    opacity: 0.9;
+    transition: transform 0.5s ease, box-shadow 0.5s ease, opacity 0.5s ease;
+    transform-origin: center;
+    box-shadow: 0 0 0 5px white;
+    margin-top: 5px;
+}
+
+/* Enhances hover interaction with image scaling and box-shadow removal */
+#contact .section-content blockquote:hover + img,
+#contact .section-content img:hover {
+    transform: scale(1.03);
+    box-shadow: none;
+    opacity: 1;
+}
+
+#contact .section-content blockquote:hover {
+    background-color: rgba(255, 255, 255, 1)
+}
+
+/* Styling for blockquotes, including background color and padding */
+#contact .section-content blockquote {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    margin: 0;
+}
+
+
+/* Layout adjustments for the contact form, utilizing grid for alignment */
+#contact .contact-form {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); 
+    width: 80%; 
+    margin-left: 40px; 
+}
+
+/* Consistent styling for form inputs, selects, and textareas, including focus */
+#contact .contact-form input,
+#contact .contact-form select,
+#contact .contact-form textarea {
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    border: 5px solid rgba(255, 255, 255, 0.7); 
+}
+
+#contact .contact-form input:focus,
+#contact .contact-form select:focus,
+#contact .contact-form textarea:focus {
+    box-shadow:
+        0 0 0 1px rgb(116, 82, 171), /* External shadow with lower transparency (darker) */
+        0 0 0 2.5px rgba(154, 126, 199, 0.75), /* The next shadow layer is slightly lighter and wider */
+        0 0 0 2.6px rgba(154, 126, 199, 0.5), /* An even lighter and wider shadow */
+        0 0 0 3.3px rgba(255, 255, 255, 0.3);
+    border-radius: 2px;   
+    outline: none; 
+    border: 5px solid rgba(255, 255, 255, 1); 
+    opacity: 1;
+}
+
+
+#contact .contact-form select[name="event"] {
+    width: calc(100% + 30px); 
+}
+
+
+#contact .contact-form input[type="submit"] {
+    width: 20%; 
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block; 
+    background-color: #f7ced3;
+    border: 5px  solid lightpink ;
+    opacity: 0.8;
+}
+
+#contact .contact-form input[type="submit"]:hover {
+    opacity: 1;
+}
+
+
+#contact .contact-form input[type="text"],
+#contact .contact-form input[type="email"],
+#contact .contact-form input[type="date"],
+#contact .contact-form input[type="number"] {
+    background-color: lightpink;
+    opacity: 0.8;
+}
+
+#contact .contact-form select,
+#contact .contact-form textarea {
+    background-color: #cce6c2;
+    opacity: 0.8;
+}
+
+/* When user focusing on elements of contact form we increasing opacity */
+#contact .contact-form select:focus,
+#contact .contact-form textarea:focus,
+#contact .contact-form input[type="text"]:focus,
+#contact .contact-form input[type="email"]:focus,
+#contact .contact-form input[type="date"]:focus,
+#contact .contact-form input[type="number"]:focus,
+#contact .contact-form input[type="submit"]:focus,
+#contact .contact-form select[name="event"]:focus,
+#contact .contact-form input:required:valid:focus,
+#contact .contact-form select:required:valid:focus,
+#contact .contact-form textarea:required:valid:focus {
+    opacity: 1;
+} 
+
+#contact::after {
+    content: '';
+    position: absolute; 
+    width: 100%; 
+    height: 15vh; 
+    background-image: url('../img/custom/hr.svg');
+    background-size: cover;
+    left: 0px;
+    bottom: -40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1; 
+}
+
+#contact p, #contact .name, #contact .references {
+    margin-left: 10px;
+}
+
+
+#contact .contact-form input:required:valid,
+#contact .contact-form select:required:valid,
+#contact .contact-form textarea:required:valid {
+    background-color: #cce6c2;
+    opacity: 0.8; 
+    border: 5px solid white; 
+}
+
+
+#contact .contact-form input[type="submit"]:disabled{
+    background-color: white;
+    border: 5px solid gray;
+    opacity: 0.8;
+}
+
+#contact .contact-form input[type="submit"]:disabled:hover {
+    opacity: 1;
+}
+
+#contact form:valid input[type="submit"] {
+    background-color: #cce6c2;
+    border: 5px solid lightgreen;
+    opacity: 0.8;
+}
+
+/* Styles for the element when you press submit */
+#heyoooo {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%); 
+    width: 300px;
+    height: 120px;
+    z-index: -100000;
+    opacity: 0;
+}
+
+#heyoooo a {
+    width: 35px;
+    margin-right: 40px;
+}
+
+#heyoooo img {
+    height: 80%;
+    width: 190%;
+}
+
+
+#heyoooo div {
+    display: flex;
+    flex-direction: column;
+    color: green;
+    font-family: Textile;
+    font-size: 15px;
+}
+
+#heyoooo div b {
+    text-transform: uppercase;
+    font-size: 30px;
+    color: black;
+}
+
+
+#heyoooo.open {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    top: 40px;
+    opacity: 1; 
+    background-color: rgba(255, 255, 255, 1);   
+    box-shadow: 0 0 8px 4px green; 
+    transform: translateX(-50%) translateY(0); 
+    border-radius: 20px;
+    z-index: 1000000;
+    transition: all 0.5s ease;
+}
+
+
+
+#team h2, #menu h2, #contact h2 {
+    color: lightgreen;
+}
+
+/* Footer styling */
+footer {
+    padding-top: 35px;
+    padding-bottom: 0px;
+    background-color: white;
+    border-right: 2px dashed green; 
+    border-left: 2px dashed green; 
+    max-width: 1199px;
+    min-width: 768px;
+    width: 100%;
+    margin: auto;
+}
+
+footer .section-content::after {
+    content: "";
+    display: block;
+    width: 25%; 
+    height: auto;
+    padding: 3%;
+    padding-top: 7%;
+    background-image: url('../img/custom/gang.svg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center; 
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); 
+}
+
+footer .section-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: relative; 
+    min-height: 100px; 
+}
+
+footer .section-content span a {
+    text-decoration: none; 
+    color: black; 
+    font-weight: bold; 
+    font-size: 15px;
+    font-family: Calistoga;
+}
+
+footer .section-content span a:hover {
+    color: green;
+}
+
+footer span {
+    font-weight: bold; 
+    font-size: 15px;
+    font-family: Calistoga;
+}
+
+/* Back to top button */
+#sweatshop {
+    display: none; 
+    position: fixed; 
+    bottom: 10px; 
+    right: 20px; 
+    z-index: 100; 
+    cursor: pointer; 
+    color: green;
+    width: 50px;
+    height: 50px;
+    border: 2px solid green;
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#sweatshop:hover {
+    background-color: green;
+    color: white;
+    border: 0;
+    transition: background-color 0.5s ease;
+    border: 2px solid green;
+}
+
+
+.scrolled #sweatshop {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+#about, #events, #services, footer {
+    border-right: 1px dashed green; 
+    border-left: 1px dashed green; 
+}
